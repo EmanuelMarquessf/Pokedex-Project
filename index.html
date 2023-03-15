@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body id="body">
+    <div id="pokeball">
+        <div class="redSide" id="redSide"></div>
+        <div class="whiteSide" id="whiteSide"></div>
+        <div class="midCircle" id="midCircle"></div>
+        <div class="botao" id="botao"></div>
+    </div>
+    <div class="container" id="container">
+        <header>
+            <nav class="topStripe" id="topStripe">
+                <ul class="itensHeader" id="itensHeader">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./pokedex.html">Pokedex</a></li>
+                    <li><a href="Contato">Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="pageFormatation">
+            <section class="searchBar" id="searchBar">
+                <div class="divSearchBar">
+                    <img src="./media/pokeball.png" class="imgPokeball" id="imgPokeball1" alt="">
+                    <div class="divInput">
+                        <input type="text" class="searchInput" id="searchInput" placeholder="Digite aqui...">
+                        <input type="button" class="searchButton" value="Search">
+                    </div>
+                    <img src="./media/pokeball.png" class="imgPokeball" id="imgPokeball2" alt="">
+                </div>
+
+            </section>
+            <section class="pokemonCards" id="pokemonCards">
+
+
+                
+
+            </section>
+
+            <div class="modal" id="modal">
+                <div class="modal-content" id="content">
+                    <span class="close" id="close" onclick="closeModal()">&times;</span>
+                    <div class="pokemonDescription">
+                        <p> 
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat,
+                            repudiandae fugit sit provident nostrum vitae ipsum perspiciatis commodi quod omnis officia
+                            delectus vel ipsam ut ea, ullam nesciunt illum doloremque.
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat,
+                            repudiandae fugit sit provident nostrum vitae ipsum perspiciatis commodi quod omnis officia
+                            delectus vel ipsam ut ea, ullam nesciunt illum doloremque.
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat,
+                            repudiandae fugit sit provident nostrum vitae ipsum perspiciatis commodi quod omnis officia
+                            delectus vel ipsam ut ea, ullam nesciunt illum doloremque.
+                        </p>
+                    </div>
+                    
+                   
+                    <div class="cardPokeModal" id="cardPokeModal">
+                        <div class="pokemonName">
+                            <p class="namePoke" id="namePoke"> </p>
+                        </div>
+                        <div class="pokemonId">
+                            <p class="idPoke" id="idPoke"> </p>
+                        </div>
+                        <div class="pokeImg"> <img id="imgPoke"> </div>
+                        <div class="pokemonTypes" id="pokemonTypes">
+                            <p class="pokeInfo">Type</p>
+                            <div class="primaryType"><img id="PrimaryType"></div>
+                            <div class="secondaryType"><img id="SecondaryType"></div>
+                        </div>
+                        <div class="pokemonInfos">
+                            <p class="pokeInfo1">Height</p>
+                            <p class="pokeInfo2">Weight</p>
+                            <div class="pokemonInfo1">
+                                <p id="pokeHei"></p>
+                            </div>
+                            <div class="pokemonInfo2">
+                                <p id="pokeWei"></p>
+                            </div>
+                        </div>
+                        <div class="pokemonAbilities">
+                            <p class="pokeInfo">Abilities</p>
+                            <div class="pokeAbilitie" id="pokeAbilitie"></div>
+                        </div>
+
+                    </div>
+                    <p id="idPoke"></p>
+                    <div class="pokemonEvolution">
+                        <div class="pokeEvolutionName"></div>
+                        <div class="pokeEvolutionLv"></div>
+                        <div class="pokeEvolutionImg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="botStripe" id="botStripe"><small class="smallFooter" id="smallFooter">&copy; Todos os direitos
+                    reservados</small></div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="script/script.js"></script>
+
+</body>
+
+</html>
