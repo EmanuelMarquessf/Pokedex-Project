@@ -163,7 +163,19 @@ function openModal(idPoke) {
                 abilitieElement.setAttribute('title', `${hb.effect_entries[0].effect}`)
             });
             pokeAbilitie.appendChild(abilitieElement);
-            
+        }
+
+        const pokemonStats = document.querySelector('.divPokemonStats')
+        const pokeSta = pokemons.stats
+        for(stats in pokeSta){
+            const containerStats = document.createElement('div')
+            containerStats.setAttribute('class', 'containerStats')
+            containerStats.innerHTML = 
+            `
+                <div class="statsTitle">${pokeSta[stats].stat.name}: ${pokeSta[stats].base_stat}</div>
+                <div class="stats ${pokeSta[stats].stat.name}"></div></p>
+            `
+            pokemonStats.appendChild(containerStats)
         }
     })
 }

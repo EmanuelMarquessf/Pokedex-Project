@@ -594,11 +594,10 @@ img{
     display: grid;
     grid-template-areas: 
     "pokemonDescription pokemonCard"
-    "pokemonDescription pokemonCard"
+    "stats              pokemonCard"
+    "pokemonEvolution   pokemonEvolution";
 
-    "pokemonEvolution pokemonEvolution";
-
-    grid-template-rows: 1fr auto 300px;
+    grid-template-rows: 300px 300px 1fr;
     grid-template-columns: 1fr 300px;
 }
 
@@ -618,10 +617,16 @@ img{
     cursor: pointer;
 }
 
-.pokeDescription{
+.pokemonDescription{
     grid-area: pokemonDescription;
     text-align: justify;
     margin: 0px 20px 0px 0px;
+    
+}
+.pokeDescription{
+    font-size: 23px;
+    line-height: 1.5;
+    text-align: justify;
 }
 
 .pokemonEvolution{
@@ -782,6 +787,34 @@ width: 100%;
 height: auto; 
 padding: 5px;
 }
+
+/*Pokemon Stats*/
+.divPokemonStats{
+    margin-bottom: 5px;
+    grid-area: stats;
+}
+
+.containerStats{
+    width: 100%;
+    background-color: #ddd;
+}
+
+.stats{
+    text-align: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.hp{width: 90%; background-color: #04AA6D;}
+.attack{width: 90%; background-color: #2196F3;}
+.defense{width: 90%; background-color: #f44336;}
+.special-attack{width: 90%; background-color: #1ca339;}
+.special-defense{width: 90%; background-color: #0aad92;}
+.speed{width: 90%; background-color: #e1349f;}
+
+
 
 @media screen and (max-width:375px){
     header{
