@@ -1,4 +1,4 @@
-const quantPokemon = 100;
+const quantPokemon = 1060;
 const url = `https://pokeapi.co/api/v2/pokemon?limit=${quantPokemon}`;
 
 async function loadPokemon() {
@@ -108,7 +108,7 @@ function rotateImg(img, id) {
 }
 
 function FormatPokeId(pokeId) {
-    var finalId = pokeId < 9 ? `#00${pokeId}` : pokeId < 99 ? `#0${pokeId}` : `#${pokeId}`;
+    var finalId = pokeId <= 9 ? `#00${pokeId}` : pokeId <= 99 ? `#0${pokeId}` : `#${pokeId}`;
     return finalId;
 }
 
@@ -127,59 +127,10 @@ function openModal(idPoke) {
 
     axios.get(urlInfoPoke).then(response => {
         const pokemons = response.data;
-
-        //const type = `./media/${pokemons.types[0].type.name}.svg`
-        //const primaryColor = GetPrimaryColor(type);
-
-        console.log(pokemons)
-        //document.getElementById("cardPokeModal").style.backgroundColor = primaryColor;
-        document.getElementById("idPoke").innerHTML = `${FormatPokeId(pokemons.id)}`;
-        document.getElementById("namePoke").innerHTML = `${FormatName(pokemons.name)}`;
-        document.getElementById("imgPoke").src = `${pokemons.sprites.other["official-artwork"].front_default}`
-        document.getElementById("PrimaryType").src = `./media/${pokemons.types[0].type.name}.svg`
-        if (pokemons.types.length === 2) {
-            document.getElementById("SecondaryType").src = `./media/${pokemons.types[1].type.name}.svg`
-            document.getElementById("SecondaryType").style.display = "inline-block"
-            document.getElementById("PrimaryType").style.marginLeft = "0%"
-        }
-        else {
-            document.getElementById("SecondaryType").style.display = "none"
-            document.getElementById("PrimaryType").style.marginLeft = "50%"
-        }
-        console.log(pokemons)
-        document.getElementById('pokeHei').innerHTML = `${pokemons.height}`
-        document.getElementById('pokeWei').innerHTML = `${pokemons.weight}`
-
-        const abilities = pokemons.abilities;
-        const pokeAbilitie = document.getElementById('pokeAbilitie');
-
-        pokeAbilitie.innerHTML = '';
-        for(let abilitie of abilities) {
-            const url = abilitie.ability.url
-            const abilitieElement = document.createElement('p');    
-            abilitieElement.innerHTML += `<p><b><u>${FormatName(abilitie.ability.name)}</u></b></p>`;
-            axios.get(url).then(response => {
-                const hb = response.data;
-                abilitieElement.setAttribute('title', `${hb.effect_entries[0].effect}`)
-            });
-            pokeAbilitie.appendChild(abilitieElement);
-        }
-
-        const pokemonStats = document.querySelector('.divPokemonStats')
-        const pokeSta = pokemons.stats
-        for(stats in pokeSta){
-            const containerStats = document.createElement('div')
-            containerStats.setAttribute('class', 'containerStats')
-            containerStats.innerHTML = 
-            `
-                <div class="statsTitle">${pokeSta[stats].stat.name}: ${pokeSta[stats].base_stat}</div>
-                <div class="stats ${pokeSta[stats].stat.name}"></div></p>
-            `
-            pokemonStats.appendChild(containerStats)
-        }
+        createCard(pokemons)/
+        createStats(pokemons);
     })
 }
-
 
 function closeModal() {
     modal.style.display = "none";
@@ -190,6 +141,73 @@ window.onclick = function (event) {
         modal.style.display = "none"
     }
 }
+
+function createCard(pokemons){
+    document.getElementById("idPoke").innerHTML = `${FormatPokeId(pokemons.id)}`;
+    document.getElementById("namePoke").innerHTML = `${FormatName(pokemons.name)}`;
+    document.getElementById("imgPoke").src = `${pokemons.sprites.other["official-artwork"].front_default}`
+    document.getElementById("PrimaryType").src = `./media/${pokemons.types[0].type.name}.svg`
+    if (pokemons.types.length === 2) {
+        document.getElementById("SecondaryType").src = `./media/${pokemons.types[1].type.name}.svg`
+        document.getElementById("SecondaryType").style.display = "inline-block"
+        document.getElementById("PrimaryType").style.marginLeft = "0%"
+    }
+    else {
+        document.getElementById("SecondaryType").style.display = "none"
+        document.getElementById("PrimaryType").style.marginLeft = "50%"
+    }
+    console.log(pokemons)
+    document.getElementById('pokeHei').innerHTML = `${pokemons.height}`
+    document.getElementById('pokeWei').innerHTML = `${pokemons.weight}`
+
+    const abilities = pokemons.abilities;
+    const pokeAbilitie = document.getElementById('pokeAbilitie');
+
+    pokeAbilitie.innerHTML = '';
+    for(let abilitie of abilities) {
+        const url = abilitie.ability.url
+        const abilitieElement = document.createElement('p');    
+        abilitieElement.innerHTML += `<p><b><u>${FormatName(abilitie.ability.name)}</u></b></p>`;
+        axios.get(url).then(response => {
+            const hb = response.data;
+            abilitieElement.setAttribute('title', `${hb.effect_entries[0].effect}`)
+        });
+        pokeAbilitie.appendChild(abilitieElement);
+    }
+}
+function createStats(pokemons){
+    const pokemonStats = document.querySelector('.tablePokemonStats');
+    const pokeSta = pokemons.stats;
+
+    pokemonStats.innerHTML = 
+    `
+        <thead>
+            <tr >
+                <td class="tdTitle" colspan="2"><h2>Stat</h2></td>
+            </tr>
+        </thead>
+    `;
+
+    const tableStats = document.createElement("tbody");
+    tableStats.setAttribute("class", "tbodyPokemonStats");
+    
+    for(stats in pokeSta){
+        tableStats.innerHTML += 
+        `
+            <tr class="tr${pokeSta[stats].stat.name}">
+                <td class="tdTitleBar">${pokeSta[stats].stat.name}: <div style="float:right">${pokeSta[stats].base_stat}</div></td>
+                <td class="tdStatBar"><div class = "stats ${pokeSta[stats].stat.name}"></div></td>
+            </tr>
+        `
+        
+        pokemonStats.appendChild(tableStats);
+        let divSta = document.querySelector(`.${pokeSta[stats].stat.name}`);
+        divSta.style.width = `calc(${pokeSta[stats].base_stat}px*2)`
+    }
+}
+
+
+
 
 window.addEventListener("load", function () {
     document.querySelector(".botao").addEventListener("click", function () {
@@ -206,6 +224,9 @@ window.addEventListener("load", function () {
     });
 });
 
+function convertMeasure(){
+     
+}
 
 // function GetPrimaryColor(pokemonImage){
 //     var colorThief = new ColorThief();

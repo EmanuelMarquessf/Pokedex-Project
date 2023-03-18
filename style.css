@@ -1,12 +1,14 @@
 :root{
+    /*background color */
+    --backgroundColor: rgb(227, 227, 227);
     /*Pokeball Colors */
     --pokeballRedSide: rgb(255, 0, 0);
     --pokeballWhiteSide : rgb(240, 248, 255);
     --pokeballColorRow: rgb(49, 49, 49);
     /*Card Colors*/
     --cardTitleColor: rgb(250, 247, 247);
-    --cardPrimaryColor: rgb(205, 92, 92);
-    --cardSecondaryColor: rgb(218, 214, 218);
+    --cardPrimaryColor: #78C850;
+    --cardSecondaryColor: #A7DB8D;
 
 }
 
@@ -16,9 +18,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font: sans-serif;
 }
 body{
-    background-color: #E3E3E3;;
+    background-color: var(--backgroundColor);
 }
 
 .pageFormatation{
@@ -790,30 +793,63 @@ padding: 5px;
 
 /*Pokemon Stats*/
 .divPokemonStats{
-    margin-bottom: 5px;
+    margin-right: 20px;
     grid-area: stats;
 }
 
-.containerStats{
+.tablePokemonStats{
     width: 100%;
-    background-color: #ddd;
+    background-color: var(--cardSecondaryColor);
+    border: solid 4px var(--cardPrimaryColor);
+    border-collapse: collapse;
 }
-
-.stats{
-    text-align: right;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: white;
+td,tr{
+    border: solid 1px var(--cardPrimaryColor);
     border-radius: 5px;
 }
 
-.hp{width: 90%; background-color: #04AA6D;}
-.attack{width: 90%; background-color: #2196F3;}
-.defense{width: 90%; background-color: #f44336;}
-.special-attack{width: 90%; background-color: #1ca339;}
-.special-defense{width: 90%; background-color: #0aad92;}
-.speed{width: 90%; background-color: #e1349f;}
+thead{
+    height: 50px;
+}
 
+.tdTitle{
+    padding: 10px;
+    font-size: 16px;
+}
+.tdTitleBar{
+    padding: 0px 7px;
+    height: 2em;
+}
+
+.stats{
+    height: 100%;
+    width: 100%;
+    text-align: right;
+    padding: 15px;
+    color: white;
+    border-radius: 2px;
+}
+.tdTitleBar{
+    width: 20%;
+}
+
+.tdStatBar{
+    width: 80%;
+}
+
+.trhp{background-color: #FF5959;}
+.trattack{background-color: #F5AC78;}
+.trdefense{background-color: #FAE078;}
+.trspecial-attack{background-color: #9DB7F5;}
+.trspecial-defense{background-color: #A7DB8D;}
+.trspeed{background-color: #FA92B2;}
+
+.hp{background-color: #FF0000; border: 1px solid #A60000;}
+.attack{background-color: #F08030; border: 1px solid #9C531F;}
+.defense{background-color: #F8D030; border: 1px solid #A1871F;}
+.special-attack{background-color: #6890F0; border: 1px solid #445E9C;}
+.special-defense{background-color: #78C850; border: 1px solid #4E8234;}
+.speed{background-color: #F85888; border: 1px solid #A13959;}
 
 
 @media screen and (max-width:375px){
