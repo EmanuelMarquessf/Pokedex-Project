@@ -589,19 +589,19 @@ img{
 
     position: relative;
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    margin: 5% auto;
+    padding: 1em 4em;
     border: 1px solid #888;
-    width: 80%;
-    height: 100%;
+    width: 90%;
+    height: auto;
     display: grid;
     grid-template-areas: 
     "pokemonDescription pokemonCard"
     "stats              pokemonCard"
     "pokemonEvolution   pokemonEvolution";
 
-    grid-template-rows: 300px 300px 1fr;
-    grid-template-columns: 1fr 300px;
+    grid-template-rows: 230px 1fr 1fr;
+    grid-template-columns: 1fr 350px;
 }
 
 .close {
@@ -640,7 +640,10 @@ img{
 }
 
 .cardPokeModal{
+    width: 20em;
     height: auto;
+    margin: 10px;
+    padding: 10px;
     background-color: var(--cardPrimaryColor);
     padding: 10px;
     font-family: 'Pokemon Classic', Arial, sans-serif;
@@ -735,7 +738,7 @@ img{
 .pokeInfo{
     display: block;
     font-size: 12px;
-    width: 50%;
+    width: 100%;
     padding-left:10px ;
     justify-content: center;
 }

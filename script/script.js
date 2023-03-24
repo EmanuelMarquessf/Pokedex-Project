@@ -1,5 +1,5 @@
-const quantPokemon = 1060;
-const url = `https://pokeapi.co/api/v2/pokemon?limit=${quantPokemon}`;
+var quantPokemon = 100;
+var url = `https://pokeapi.co/api/v2/pokemon?limit=${quantPokemon}`;
 
 async function loadPokemon() {
     await axios.get(url).then(response => {
@@ -127,19 +127,37 @@ function openModal(idPoke) {
 
     axios.get(urlInfoPoke).then(response => {
         const pokemons = response.data;
-        createCard(pokemons)/
+        createCard(pokemons);
         createStats(pokemons);
+        loadDescription(pokemons.id);
     })
+    
 }
 
 function closeModal() {
     modal.style.display = "none";
+    quantPokemon += 10;
+    console.log(quantPokemon)
+    lPokemon();
 }
 
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none"
     }
+}
+
+function loadDescription(pokemonId){
+    const urlInfoPoke = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`
+    modal.style.display = "block"
+
+    axios.get(urlInfoPoke).then(response => {
+        const pokemon = response.data;
+        const pDescription = document.querySelector('.pokeDescription');
+        console.log(pokemon);
+        const contentDescription = pokemon.flavor_text_entries.find(entry => entry.language.name === 'en').flavor_text;
+        pDescription.innerHTML = contentDescription;
+    })
 }
 
 function createCard(pokemons){
@@ -162,19 +180,29 @@ function createCard(pokemons){
 
     const abilities = pokemons.abilities;
     const pokeAbilitie = document.getElementById('pokeAbilitie');
+    const pokeHiddenAbilitie = document.getElementById('pokeHiddenAbilitie')
 
     pokeAbilitie.innerHTML = '';
+    pokeHiddenAbilitie.innerHTML = '';
+
     for(let abilitie of abilities) {
         const url = abilitie.ability.url
-        const abilitieElement = document.createElement('p');    
+        const abilitieElement = document.createElement('p');
+        
         abilitieElement.innerHTML += `<p><b><u>${FormatName(abilitie.ability.name)}</u></b></p>`;
+
         axios.get(url).then(response => {
             const hb = response.data;
             abilitieElement.setAttribute('title', `${hb.effect_entries[0].effect}`)
         });
-        pokeAbilitie.appendChild(abilitieElement);
+        
+        if(abilitie.is_hidden === false)
+            pokeAbilitie.appendChild(abilitieElement);
+        else
+            pokeHiddenAbilitie.appendChild(abilitieElement);
     }
 }
+
 function createStats(pokemons){
     const pokemonStats = document.querySelector('.tablePokemonStats');
     const pokeSta = pokemons.stats;
@@ -207,8 +235,6 @@ function createStats(pokemons){
 }
 
 
-
-
 window.addEventListener("load", function () {
     document.querySelector(".botao").addEventListener("click", function () {
         document.querySelector(".whiteSide").classList.add("moveWhiteSide");
@@ -224,9 +250,6 @@ window.addEventListener("load", function () {
     });
 });
 
-function convertMeasure(){
-     
-}
 
 // function GetPrimaryColor(pokemonImage){
 //     var colorThief = new ColorThief();
